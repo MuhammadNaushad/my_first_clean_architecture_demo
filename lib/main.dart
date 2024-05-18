@@ -3,10 +3,12 @@ import 'package:get_it/get_it.dart';
 import 'package:my_first_clean_architecture_demo/data/repository/firebase_user_repository.dart';
 import 'package:my_first_clean_architecture_demo/data/repository/rest_api_user_repository.dart';
 import 'package:my_first_clean_architecture_demo/data/repository/user_repository.dart';
+import 'package:my_first_clean_architecture_demo/features/auth/screens/signup.dart';
 
 import 'screens/user_list.dart';
 
 final GetIt getIt = GetIt.instance;
+
 void main() {
   getIt.registerLazySingleton<UserRepository>(() => FirebaseUserRepository());
   runApp(const MyApp());
@@ -18,62 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Blog App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: UserListScreen(
-        userRepository: getIt(),
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      home: const SignUpScreen(),
     );
   }
 }
